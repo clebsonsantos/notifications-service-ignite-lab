@@ -1,4 +1,3 @@
-import env from '@main/config/env';
 import { Injectable, OnModuleDestroy } from '@nestjs/common';
 import { ServerKafka } from '@nestjs/microservices';
 
@@ -11,13 +10,8 @@ export class KafkaConsumerService
     super({
       client: {
         clientId: 'notifications',
-        brokers: [env().kafka.brokers],
-        sasl: {
-          mechanism: env().kafka.mechanism as 'scram-sha-512',
-          username: env().kafka.username,
-          password: env().kafka.password,
-        },
-        ssl: true,
+        brokers: ['localhost:9092'],
+        ssl: false,
       },
     });
   }
